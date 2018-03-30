@@ -53,6 +53,8 @@ Plug 'rhysd/vim-clang-format'									" 自动格式化
 Plug 'vim-scripts/ShowTrailingWhitespace'						" 高亮多余的空格
 Plug 'skywind3000/asyncrun.vim'									" 异步运行命令
 Plug 'scrooloose/syntastic'										" 语法报错
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'								" vim
 call plug#end()
 
 " ctrl-i 自动格式化
