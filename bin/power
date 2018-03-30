@@ -1,0 +1,12 @@
+#!/bin/bash
+bat=""
+if [ -d /sys/class/power_supply/BAT0 ];then
+        bat="BAT0 $(cat /sys/class/power_supply/BAT0/capacity)%"
+fi
+if [ -d /sys/class/power_supply/BAT1 ];then
+        bat=$bat",  BAT1 $(cat /sys/class/power_supply/BAT1/capacity)%"
+fi
+if [ $(cat /sys/class/power_supply/AC/online) -eq 1 ];then
+        bat=$bat",  AC已接入"
+fi
+echo $bat

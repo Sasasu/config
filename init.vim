@@ -52,6 +52,7 @@ Plug 'kana/vim-operator-user'									" 映射
 Plug 'rhysd/vim-clang-format'									" 自动格式化
 Plug 'vim-scripts/ShowTrailingWhitespace'						" 高亮多余的空格
 Plug 'skywind3000/asyncrun.vim'									" 异步运行命令
+Plug 'scrooloose/syntastic'										" 语法报错
 call plug#end()
 
 " ctrl-i 自动格式化
@@ -59,3 +60,14 @@ map <C-i> <Plug>(operator-clang-format)
 
 " 启动自动补全
 call deoplete#enable()
+
+
+" syntasitc 的推荐设置
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
