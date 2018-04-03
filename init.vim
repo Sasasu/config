@@ -38,14 +38,28 @@ set smartindent
 set cindent
 set tabstop =4
 set shiftwidth =4
+
 " auto-install vim-plug
-if empty(glob('~/.config/nvim/autoload/plug.vim'))
-  silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dir https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall
+if has('nvim')
+  if empty(glob('~/.config/nvim/autoload/plug.vim'))
+    silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dir https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall
+  endif
+else
+  if empty(glob('~/.vim/autoload/plug.vim'))
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dir https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall
+  endif
 endif
 
 call plug#begin('~/.config/nvim/plugged')
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } 	" 补全框架
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
 Plug 'zchee/deoplete-clang'										" c++补全
 Plug 'shougo/neoinclude.vim'									" include 补全
 Plug 'kana/vim-operator-user'									" 映射
@@ -54,7 +68,8 @@ Plug 'vim-scripts/ShowTrailingWhitespace'						" 高亮多余的空格
 Plug 'skywind3000/asyncrun.vim'									" 异步运行命令
 Plug 'scrooloose/syntastic'										" 语法报错
 Plug 'godlygeek/tabular'
-Plug 'plasticboy/vim-markdown'								" vim
+Plug 'plasticboy/vim-markdown'									" markdown 语法
+Plug 'fugalh/desert.vim'										" 配色
 call plug#end()
 
 " ctrl-i 自动格式化
@@ -62,7 +77,6 @@ map <C-i> <Plug>(operator-clang-format)
 
 " 启动自动补全
 call deoplete#enable()
-
 
 " syntasitc 的推荐设置
 set statusline+=%#warningmsg#
@@ -72,4 +86,5 @@ set statusline+=%*
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+let g:syntastic_check_on_wq = 1
+colorscheme desert
