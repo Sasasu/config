@@ -70,6 +70,7 @@ Plug 'scrooloose/syntastic'										" 语法报错
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'									" markdown 语法
 Plug 'fugalh/desert.vim'										" 配色
+Plug 'lilydjwg/fcitx.vim'
 call plug#end()
 
 " ctrl-i 自动格式化
