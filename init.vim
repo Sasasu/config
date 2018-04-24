@@ -5,8 +5,8 @@ set relativenumber
 syntax on
 " 退出后不清空屏幕
 set t_ti= t_te=
-" 禁用鼠标
-set mouse-=a
+" 启用鼠标
+set mouse=a
 " 在状态栏显示正在输入的命令
 set showcmd
 " 左下角显示当前vim模式
@@ -38,6 +38,15 @@ set smartindent
 set cindent
 set tabstop =4
 set shiftwidth =4
+" 显示tab和空格
+set list
+" 设置tab和空格样式
+set lcs=tab:\|\ ,nbsp:%,trail:-
+" 设定行首tab为灰色
+highlight LeaderTab guifg=#666666
+" 匹配行首tab
+match LeaderTab /^\t/
+set ts=4 sts=4 sw=4 et
 
 " auto-install vim-plug
 if has('nvim')
