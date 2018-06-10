@@ -1,0 +1,6 @@
+#!/bin/fish
+yes | sudo pacman -Suy
+while [ $status != 0  ]
+	yes | sudo pacman -Suy
+end
+

@@ -6,3 +6,5 @@ cp ./init.vim  ~/.config/nvim/
 cp ./init.vim ~/.vimrc
 
 cp config.fish ../../.config/fish/config.fish
+
+sudo cp bin/* /bin
