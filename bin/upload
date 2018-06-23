@@ -1,0 +1,3 @@
+#!/bin/bash
+curl -F "name=@$1" https://img.vim-cn.com/
+
