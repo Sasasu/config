@@ -1,3 +1,4 @@
 #!/bin/bash
-curl -F "name=@$1" https://img.vim-cn.com/
-
+url=$(curl -F "name=@$1" https://img.vim-cn.com/)
+echo $url
+echo $url | xclip -i -selection c
