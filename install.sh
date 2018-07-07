@@ -7,4 +7,4 @@ cp ./init.vim ~/.vimrc
 
 cp config.fish ../../.config/fish/config.fish
 
-sudo cp bin/* /bin
+sudo cp bin/* /usr/local/bin/
