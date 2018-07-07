@@ -1,4 +1,11 @@
 function ia
-	set -gx PATH /opt/anaconda/bin $PATH
+	set platform (uname | grep Darwin)
+	if [ $platform ]
+		echo "set mac PATH"
+		set -gx PATH /Users/$USER/anaconda2/bin $PATH
+	else
+		echo "set linux PATH"
+		set -gx PATH /opt/anaconda/bin $PATH
+	end
 	source (conda info --root)/etc/fish/conf.d/conda.fish
 end
