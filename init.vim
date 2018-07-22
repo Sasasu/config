@@ -32,6 +32,10 @@ map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
+nmap w= :resize +3<CR>
+nmap w- :resize -3<CR>
+nmap w[ :vertical resize -3<CR>
+nmap w] :vertical resize +3<CR>
 " 缩进和对齐
 set autoindent
 set smartindent
@@ -80,10 +84,16 @@ Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'									" markdown 语法
 Plug 'fugalh/desert.vim'										" 配色
 Plug 'lilydjwg/fcitx.vim'
+Plug 'rust-lang/rust.vim'
+Plug 'racer-rust/vim-racer'
 call plug#end()
 
 " ctrl-i 自动格式化
 map <C-i> <Plug>(operator-clang-format)
+set hidden
+let g:racer_cmd = "/bin/racer"
+let g:racer_experimental_completer = 1
+
 
 " 启动自动补全
 call deoplete#enable()
@@ -97,6 +107,14 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 1
+let g:rustfmt_autosave = 1
+
+au FileType rust nmap gd <Plug>(rust-def)
+au FileType rust nmap gs <Plug>(rust-def-split)
+au FileType rust nmap gx <Plug>(rust-def-vertical)
+au FileType rust nmap <leader>gd <Plug>(rust-doc)
+
+
 colorscheme desert
 
 
