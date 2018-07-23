@@ -86,6 +86,7 @@ Plug 'fugalh/desert.vim'										" 配色
 Plug 'lilydjwg/fcitx.vim'
 Plug 'rust-lang/rust.vim'
 Plug 'racer-rust/vim-racer'
+Plug 'mileszs/ack.vim'
 call plug#end()
 
 " ctrl-i 自动格式化
@@ -115,6 +116,7 @@ au FileType rust nmap gx <Plug>(rust-def-vertical)
 au FileType rust nmap <leader>gd <Plug>(rust-doc)
 
 
+let g:ackprg = 'ag --vimgrep'
 colorscheme desert
 
 
