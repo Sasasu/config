@@ -1,10 +1,6 @@
 set nocompatible
-" 绝对行号
 set relativenumber
-" 开启语法高亮
 syntax on
-" 退出后不清空屏幕
-set t_ti= t_te=
 " 启用鼠标
 set mouse=a
 " 在状态栏显示正在输入的命令
@@ -53,73 +49,62 @@ match LeaderTab /^\t/
 set ts=4 sts=4 sw=4 et
 
 " auto-install vim-plug
-if has('nvim')
-  if empty(glob('~/.config/nvim/autoload/plug.vim'))
-    silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dir https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-  endif
-else
-  if empty(glob('~/.vim/autoload/plug.vim'))
-    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dir https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-  endif
+if empty(glob('~/.config/nvim/autoload/plug.vim'))
+  silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dir https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
 call plug#begin('~/.config/nvim/plugged')
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
-Plug 'zchee/deoplete-clang'										" c++补全
-Plug 'shougo/neoinclude.vim'									" include 补全
+" Plug 'w0rp/ale' " lsp
+Plug 'rust-lang/rust.vim'
 Plug 'kana/vim-operator-user'									" 映射
-Plug 'rhysd/vim-clang-format'									" 自动格式化
 Plug 'vim-scripts/ShowTrailingWhitespace'						" 高亮多余的空格
 Plug 'skywind3000/asyncrun.vim'									" 异步运行命令
-Plug 'scrooloose/syntastic'										" 语法报错
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'									" markdown 语法
 Plug 'fugalh/desert.vim'										" 配色
 Plug 'lilydjwg/fcitx.vim'
-Plug 'rust-lang/rust.vim'
-Plug 'racer-rust/vim-racer'
 Plug 'mileszs/ack.vim'
+Plug 'ncm2/ncm2'
+Plug 'roxma/nvim-yarp'
+Plug 'ncm2/ncm2-bufword'
+Plug 'ncm2/ncm2-tmux'
+Plug 'ncm2/ncm2-path'
+Plug 'ncm2/ncm2-racer'
+Plug 'ncm2/ncm2-jedi'
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
 call plug#end()
 
-" ctrl-i 自动格式化
-map <C-i> <Plug>(operator-clang-format)
 set hidden
-let g:racer_cmd = "/bin/racer"
-let g:racer_experimental_completer = 1
+" neovim-lsp
+nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+let g:LanguageClient_serverCommands = {
+    \ 'rust': ['rls']
+    \ }
+" ncm2
+autocmd BufEnter * call ncm2#enable_for_buffer()
+set completeopt=noinsert,menuone,noselect
 
-
-" 启动自动补全
-call deoplete#enable()
-
-" syntasitc 的推荐设置
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 1
-let g:rustfmt_autosave = 1
-
-au FileType rust nmap gd <Plug>(rust-def)
-au FileType rust nmap gs <Plug>(rust-def-split)
-au FileType rust nmap gx <Plug>(rust-def-vertical)
-au FileType rust nmap <leader>gd <Plug>(rust-doc)
-
+let g:ale_fix_on_save = 1
+let g:ale_completion_enabled = 1
+let b:ale_linters = {'rust': ['rls']}
 
 let g:ackprg = 'ag --vimgrep'
-colorscheme desert
 
+colorscheme desert
+set termguicolors
+set background=dark
+highlight Normal guibg=NONE ctermbg=None
 
 if has('nvim')
   set guicursor=
 endif
+
+let g:python2_host_prog = '/usr/local/bin/python'
+let g:python3_host_prog = '/usr/local/bin/python3'
