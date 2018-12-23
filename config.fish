@@ -1,4 +1,5 @@
-function ia
+set -gx fish_greeting ""
+    function ia
 	set platform (uname | grep Darwin)
 	if [ $platform ]
 		echo "set mac PATH"
@@ -9,3 +10,6 @@ function ia
 	end
 	source (conda info --root)/etc/fish/conf.d/conda.fish
 end
+
+set -gx PATH ~/.cargo/bin $PATH
+export SSH_AUTH_SOCK=(gpgconf --list-dirs agent-ssh-socket)
