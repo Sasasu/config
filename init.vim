@@ -9,6 +9,8 @@ set showcmd
 set showmode
 " 在上下移动光标时，光标的上方或下方至少会保留显示的行数
 set scrolloff=7
+set hidden
+set signcolumn=yes
 " F2 行号开关，用于鼠标复制代码用
 function! HideNumber()
   if(&relativenumber == &number)
@@ -99,8 +101,8 @@ endif
 nmap <c-f>   <Plug>(coc-format-selected)
 nmap <silent><esc> :noh<CR>
 
-" <c-space> 提示补全
-imap <silent><expr> <c-space> coc#refresh()
+" <c-i> 提示补全
+imap <silent><expr> <c-i> coc#refresh()
 
 vmap <c-f>   <Plug>(coc-format-selected)
 
