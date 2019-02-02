@@ -96,7 +96,6 @@ if has('nvim')
   set guicursor=
 endif
 
-nmap <c-f>   <Plug>(coc-format-selected)
 nmap <silent><esc> :noh<CR>
 
 " <c-i> 提示补全
@@ -106,6 +105,7 @@ vmap <c-f>   <Plug>(coc-format-selected)
 
 " Use `:Format` for format current buffer
 command! -nargs=0 Format :call CocAction('format')
+nmap <c-f>   :Format <CR>
 
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
@@ -117,7 +117,7 @@ let g:netrw_banner = 0
 let g:netrw_liststyle = 3
 let g:netrw_browse_split = 4
 let g:netrw_altv = 1
-let g:netrw_winsize = 25
+let g:netrw_winsize = 20
 augroup ProjectDrawer
   autocmd!
   autocmd VimEnter * :Vexplore
