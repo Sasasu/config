@@ -62,8 +62,6 @@ Plug 'kana/vim-operator-user'
 Plug 'vim-scripts/ShowTrailingWhitespace'
 " 异步运行命令
 Plug 'skywind3000/asyncrun.vim'
-" 配色
-Plug 'fugalh/desert.vim'
 " Linux 下自动切换 fcitx 的输入状态
 Plug 'lilydjwg/fcitx.vim'
 " !Ack 全文搜索
@@ -114,4 +112,13 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
-
+" file tree
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+let g:netrw_browse_split = 4
+let g:netrw_altv = 1
+let g:netrw_winsize = 25
+augroup ProjectDrawer
+  autocmd!
+  autocmd VimEnter * :Vexplore
+augroup END
