@@ -72,7 +72,8 @@ Plug 'jceb/vim-orgmode'
 Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
 " Tabularize /=\zs 按 "=" 对齐, 参数 zs 排除 "="
 Plug 'godlygeek/tabular'
-
+" 顶端 buffer 列表
+Plug 'ap/vim-buftabline'
 " 一堆补全插件
 " Plug 'ncm2/ncm2'
 " Plug 'ncm2/ncm2-bufword'
@@ -113,12 +114,19 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
 " file tree
+" Vex 打开侧边 buffer
 let g:netrw_banner = 0
 let g:netrw_liststyle = 3
 let g:netrw_browse_split = 4
 let g:netrw_altv = 1
-let g:netrw_winsize = 20
+let g:netrw_winsize = 10
 augroup ProjectDrawer
   autocmd!
   autocmd VimEnter * :Vexplore
 augroup END
+
+" 顶端buffer列表
+" bd 关闭buffer, bw 保存并关闭 buffer
+" ls -> 1,3bd
+nnoremap <C-N> :bnext<CR>
+nnoremap <C-P> :bprev<CR>
