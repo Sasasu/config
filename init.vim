@@ -74,14 +74,7 @@ Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
 Plug 'godlygeek/tabular'
 " 顶端 buffer 列表
 Plug 'ap/vim-buftabline'
-" 一堆补全插件
-" Plug 'ncm2/ncm2'
-" Plug 'ncm2/ncm2-bufword'
-" Plug 'ncm2/ncm2-tmux'
-" Plug 'ncm2/ncm2-path'
-" Plug 'ncm2/ncm2-racer'
-" Plug 'ncm2/ncm2-jedi'
-
+Plug 'google/vim-jsonnet'
 call plug#end()
 
 " ======= 插件配置 ==========
@@ -113,20 +106,10 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
-" file tree
-" Vex 打开侧边 buffer
-let g:netrw_banner = 0
-let g:netrw_liststyle = 3
-let g:netrw_browse_split = 4
-let g:netrw_altv = 1
-let g:netrw_winsize = 10
-"augroup ProjectDrawer
-"  autocmd!
-"  autocmd VimEnter * :Vexplore
-"augroup END
-
 " 顶端buffer列表
 " bd 关闭buffer, bw 保存并关闭 buffer
 " ls -> 1,3bd
 nnoremap <C-N> :bnext<CR>
 nnoremap <C-P> :bprev<CR>
+
+let g:netrw_winsize = 10
