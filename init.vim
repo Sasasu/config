@@ -80,10 +80,9 @@ call plug#end()
 " ======= 插件配置 ==========
 let g:ackprg = 'ag --vimgrep'
 
-colorscheme desert
+set t_Co=256
 set termguicolors
-set background=dark
-highlight Normal guibg=NONE ctermbg=None
+colorscheme desert
 
 if has('nvim')
 " kconsole 不支持 guicursor

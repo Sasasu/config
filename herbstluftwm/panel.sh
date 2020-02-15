@@ -12,8 +12,7 @@ x=${geometry[0]}
 y=${geometry[1]}
 panel_width=${geometry[2]}
 panel_height=16
-_font="-*-fixed-medium-*-*-*-14-*-*-*-*-*-*-*"
-font="-*-ZfullGB-*-*-*-*-10-*-*-*-*-*-*-*"
+font='-*-fixed-medium-*-*-*-13-*-*-*-*-*-*-*'
 bgcolor=$(hc get frame_border_normal_color)
 selbg=$(hc get window_border_active_color)
 selfg='#101010'
@@ -115,13 +114,14 @@ hc pad $monitor $panel_height
                 echo -n " ${i:1} "
             fi
         done
+
         echo -n "$separator"
         echo -n "^bg()^fg() ${windowtitle//^/^^}"
         # small adjustments
         right="$separator^bg() $date $separator"
         right_text_only=$(echo -n "$right" | sed 's.\^[^(]*([^)]*)..g')
         # get width of right aligned text.. and add some space..
-        width=$($textwidth "$_font" "$right_text_only    ")
+        width=$($textwidth "$font" "$right_text_only    ")
         echo -n "^pa($(($panel_width - $width)))$right"
         echo
 
