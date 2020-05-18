@@ -1,12 +1,11 @@
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
   silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dir https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+  autocmd VimEnter * PlugInstall --sync | source "~/.config/nvim/init.vim"
 endif
 
 call plug#begin('~/.config/nvim/plugged')
 Plug 'kana/vim-operator-user'                                          " 映射
 Plug 'vim-scripts/ShowTrailingWhitespace'                              " 高亮多余的空格
-Plug 'skywind3000/asyncrun.vim'                                        " 运行命令
 Plug 'lilydjwg/fcitx.vim'                                              " 自动切换 fcitx 的输入状态
 Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}} " lsp
 Plug 'ap/vim-buftabline'                                               " 顶端 buffer 列表
@@ -14,6 +13,7 @@ Plug 'godlygeek/tabular'                                               " Tabular
 Plug 'liuchengxu/vim-which-key'                                        " cheatsheet
 Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }                      " fzf
 Plug 'tpope/vim-fugitive'                                              " git
+Plug 'voldikss/vim-floaterm'                                           " popup terminal
 
 Plug 'jceb/vim-orgmode'
 Plug 'joshdick/onedark.vim'
@@ -63,54 +63,67 @@ let g:maplocalleader = ","
 let g:which_key_map =  {}
 
 nmap <silent><esc> :nohlsearch<CR>
-map <C-j> <C-W>j " move window
-map <C-k> <C-W>k " move window
-map <C-h> <C-W>h " move window
-map <C-l> <C-W>l " move window
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
 
-nmap <silent> w= : resize +3<CR>
-nmap <silent> w- : resize -3<CR>
-nmap <silent> w[ : vertical resize -3<CR>
-nmap <silent> w] : vertical resize +3<CR>
-nmap <silent> w  : <c-u>WhichKey  'w'<CR>
+nmap w= : resize +3<CR>
+nmap w- : resize -3<CR>
+nmap w[ : vertical resize -3<CR>
+nmap w] : vertical resize +3<CR>
+nmap w  : <c-u>WhichKey  'w'<CR>
 
 " <c-i> 提示补全
 imap <silent><expr> <c-i> coc#refresh()
 
 command! -nargs=0 Format :call CocAction('format')
-vmap <C-f>   <Plug>(coc-format-selected)
-nmap <silent> K :call CocActionAsync('doHover')<CR>
-
-nmap <silent> g[ <Plug>(coc-diagnostic-prev)
-nmap <silent> g] <Plug>(coc-diagnostic-next)
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-nmap <silent> g  : <c-u>WhichKey 'g'<CR>
+vmap <C-f> <Plug>(coc-format-selected)<CR>
+nmap K    :call CocActionAsync('doHover')<CR>
+nmap g[    <Plug>(coc-diagnostic-prev)<CR>
+nmap g]    <Plug>(coc-diagnostic-next)<CR>
+nmap gd    <Plug>(coc-definition)<CR>
+nmap gy    <Plug>(coc-type-definition)<CR>
+nmap gi    <Plug>(coc-implementation)<CR>
+nmap gr    <Plug>(coc-references)<CR>
+nmap ?g   :<c-u>WhichKey 'g'<CR>
 
 " 顶端buffer列表
 " bd 关闭buffer, bw 保存并关闭 buffer
 " ls -> 1,3bd
-nnoremap <C-N> :bnext<CR>
-nnoremap <C-P> :bprev<CR>
-nnoremap <leader>1 :1b<CR>
-nnoremap <leader>2 :2b<CR>
-nnoremap <leader>3 :3b<CR>
-nnoremap <leader>4 :4b<CR>
-nnoremap <leader>5 :5b<CR>
-nnoremap <leader>6 :6b<CR>
-nnoremap <silent> <leader> : <c-u>WhichKey  '<leader>'<CR>
+nnoremap <C-N>      : bnext<CR>
+nnoremap <C-P>      : bprev<CR>
+nnoremap <leader> 1 : 1b<CR>
+nnoremap <leader> 2 : 2b<CR>
+nnoremap <leader> 3 : 3b<CR>
+nnoremap <leader> 4 : 4b<CR>
+nnoremap <leader> 5 : 5b<CR>
+nnoremap <leader> 6 : 6b<CR>
+nnoremap bd         : <c-u>bd<CR>
 
 let g:Lf_PreviewInPopup = 1
-noremap <leader>f :<C-U><C-R>=printf("Leaderf file %s", "")<CR><CR>
-noremap <leader>r :<C-U><C-R>=printf("Leaderf rg %s", "")<CR><CR>
-noremap <leader>l :<C-U><C-R>=printf("Leaderf line %s", "")<CR><CR>
-noremap <leader>m :<C-U><C-R>=printf("Leaderf mru %s", "")<CR><CR>
+let g:Lf_ShortcutF = "<leader>fx"
+noremap <leader>ff :<C-U><C-R>=printf("Leaderf file %s", "")<CR><CR>
+noremap <leader>fr :<C-U><C-R>=printf("Leaderf rg %s", "")<CR><CR>
+noremap <leader>fl :<C-U><C-R>=printf("Leaderf line %s", "")<CR><CR>
+noremap <leader>fm :<C-U><C-R>=printf("Leaderf mru %s", "")<CR><CR>
+
+" popup terminal
+noremap tt :FloatermNew  <CR>
+noremap th :FloatermHide  <CR>
+noremap ts :FloatermShow  <CR>
+noremap tn :FloatermNext  <CR>
+noremap tp :FloatermPrev  <CR>
+noremap t  :<c-u>WhichKey  't'<CR>
+tnoremap <Esc> <C-\><C-n>
+
+" explorer
+nmap <leader>e :CocCommand explorer<CR>
 
 " cheatsheet
 call which_key#register('<leader>', "g:which_key_map")
-nnoremap <silent> <localleader> :<c-u>WhichKey  '<localleader>'<CR>
+nnoremap <leader>      :<c-u>WhichKey  '<leader>'<CR>
+nnoremap <localleader> :<c-u>WhichKey  '<localleader>'<CR>
 
 " 兼容性
 " for onedark.vim
