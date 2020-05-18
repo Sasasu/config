@@ -5,6 +5,7 @@ export SSH_AUTH_SOCK=(gpgconf --list-dirs agent-ssh-socket)
 export GPG_TTY=(tty)
 
 alias ls exa
+alias gitc "git commit -s"
 
 # TMUX
 if which tmux >/dev/null 2>&1
@@ -16,3 +17,6 @@ if which tmux >/dev/null 2>&1
         tmux attach || break
     end
 end
+
+
+alias jdark "sshpass -f /home/sa/.config/ark_ssh_pass ssh ark"
