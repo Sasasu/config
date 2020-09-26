@@ -14,16 +14,18 @@ Plug 'liuchengxu/vim-which-key'                                        " cheatsh
 Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }                      " fzf
 Plug 'tpope/vim-fugitive'                                              " git
 Plug 'voldikss/vim-floaterm'                                           " popup terminal
-
+Plug 'solarnz/thrift.vim'
 Plug 'jceb/vim-orgmode'
 Plug 'joshdick/onedark.vim'
+Plug 'mileszs/ack.vim'
+Plug 'scrooloose/nerdtree'
 call plug#end()
 
 
 " 配置
 set nocompatible
 set relativenumber
-set mouse= " 鼠标
+set mouse=a " 鼠标
 set showcmd " 在状态栏显示正在输入的命令
 set showmode " 左下角显示当前vim模式
 set scrolloff=7 " 在上下移动光标时，光标的上方或下方至少会保留显示的行数
@@ -58,7 +60,7 @@ endfunc
 nnoremap <F1> :call HideNumber()<CR>
 
 " 键位
-let g:mapleader      = "\<space>"
+let g:mapleader      = "."
 let g:maplocalleader = ","
 let g:which_key_map =  {}
 
@@ -93,12 +95,6 @@ nmap ?g   :<c-u>WhichKey 'g'<CR>
 " ls -> 1,3bd
 nnoremap <C-N>      : bnext<CR>
 nnoremap <C-P>      : bprev<CR>
-nnoremap <leader> 1 : 1b<CR>
-nnoremap <leader> 2 : 2b<CR>
-nnoremap <leader> 3 : 3b<CR>
-nnoremap <leader> 4 : 4b<CR>
-nnoremap <leader> 5 : 5b<CR>
-nnoremap <leader> 6 : 6b<CR>
 nnoremap bd         : <c-u>bd<CR>
 
 let g:Lf_PreviewInPopup = 1
@@ -143,3 +139,7 @@ colorscheme onedark
 
 " kconsole 不支持 guicursor
 set guicursor=
+
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
