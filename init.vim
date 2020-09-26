@@ -96,6 +96,7 @@ nmap ?g   :<c-u>WhichKey 'g'<CR>
 nnoremap <C-N>      : bnext<CR>
 nnoremap <C-P>      : bprev<CR>
 nnoremap bd         : <c-u>bd<CR>
+nnoremap bw         : <c-u>bw<CR>
 
 let g:Lf_PreviewInPopup = 1
 let g:Lf_ShortcutF = "<leader>fx"
