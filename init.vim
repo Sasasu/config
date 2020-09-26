@@ -8,6 +8,7 @@ Plug 'kana/vim-operator-user'                                          " 映射
 Plug 'vim-scripts/ShowTrailingWhitespace'                              " 高亮多余的空格
 Plug 'lilydjwg/fcitx.vim'                                              " 自动切换 fcitx 的输入状态
 Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}} " lsp
+Plug 'jackguo380/vim-lsp-cxx-highlight'                                " 语义高亮
 Plug 'ap/vim-buftabline'                                               " 顶端 buffer 列表
 Plug 'godlygeek/tabular'                                               " Tabularize /=\zs 按 '=' 对齐, 参数 zs 排除 '='
 Plug 'liuchengxu/vim-which-key'                                        " cheatsheet
@@ -79,7 +80,13 @@ nmap w  : <c-u>WhichKey  'w'<CR>
 " <c-i> 提示补全
 imap <silent><expr> <c-i> coc#refresh()
 
-command! -nargs=0 Format :call CocAction('format')
+command! -nargs=0 CFormat :call CocAction('format')
+command! -nargs=0 CFormatSelected :call CocAction('formatSelected', 'v')
+command! -nargs=0 CSign :call CocAction('showSignatureHelp')
+command! -nargs=0 CRename :call CocAction('rename')
+command! -nargs=0 COutLine CocList outline
+command! -nargs=0 CDocSymbols :call CocAction('documentSymbols')
+command! -nargs=0 CS CocCommand clangd.switchSourceHeader
 vmap <C-f> <Plug>(coc-format-selected)<CR>
 nmap K    :call CocActionAsync('doHover')<CR>
 nmap g[    <Plug>(coc-diagnostic-prev)<CR>
@@ -115,7 +122,8 @@ noremap t  :<c-u>WhichKey  't'<CR>
 tnoremap <Esc> <C-\><C-n>
 
 " explorer
-nmap <leader>e :CocCommand explorer<CR>
+command! -nargs=0 NTree NERDTree
+command! -nargs=0 CTree CocCommand explorer
 
 " cheatsheet
 call which_key#register('<leader>', "g:which_key_map")
@@ -144,3 +152,5 @@ set guicursor=
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
+
+let g:lsp_cxx_hl_use_text_props = 1
