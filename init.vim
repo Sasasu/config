@@ -97,6 +97,11 @@ nmap gi    <Plug>(coc-implementation)<CR>
 nmap gr    <Plug>(coc-references)<CR>
 nmap ?g   :<c-u>WhichKey 'g'<CR>
 
+noremap <buffer> L :call CocLocations('ccls','$ccls/navigate',{'direction':'D'})<cr>
+noremap <buffer> K :call CocLocations('ccls','$ccls/navigate',{'direction':'L'})<cr>
+noremap <buffer> J :call CocLocations('ccls','$ccls/navigate',{'direction':'R'})<cr>
+noremap <buffer> H :call CocLocations('ccls','$ccls/navigate',{'direction':'U'})<cr>
+
 " 顶端buffer列表
 " bd 关闭buffer, bw 保存并关闭 buffer
 " ls -> 1,3bd
