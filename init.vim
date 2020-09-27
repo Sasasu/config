@@ -81,20 +81,18 @@ nmap w  : <c-u>WhichKey  'w'<CR>
 " <c-i> 提示补全
 imap <silent><expr> <c-i> coc#refresh()
 
-command! -nargs=0 CFormat :call CocAction('format')
-command! -nargs=0 CFormatSelected :call CocAction('formatSelected', 'v')
-command! -nargs=0 CSign :call CocAction('showSignatureHelp')
-command! -nargs=0 CRename :call CocAction('rename')
+command! -nargs=0 CFormat :call CocActionAsync('format')
+command! -nargs=0 CFormatSelected :call CocActionAsync('formatSelected', 'v')
+command! -nargs=0 CSign :call CocActionAsync('showSignatureHelp')
+command! -nargs=0 CRename :call CocActionAsync('rename')
 command! -nargs=0 COutLine CocList outline
-command! -nargs=0 CDocSymbols :call CocAction('documentSymbols')
-vmap <C-f> <Plug>(coc-format-selected)<CR>
-nmap K    :call CocActionAsync('doHover')<CR>
-nmap g[    <Plug>(coc-diagnostic-prev)<CR>
-nmap g]    <Plug>(coc-diagnostic-next)<CR>
-nmap gd    <Plug>(coc-definition)<CR>
-nmap gy    <Plug>(coc-type-definition)<CR>
-nmap gi    <Plug>(coc-implementation)<CR>
-nmap gr    <Plug>(coc-references)<CR>
+command! -nargs=0 CDocSymbols :call CocActionAsync('documentSymbols')
+vmap <C-f> :call CocActionAsync('formatSelected', 'v')<CR>
+nmap K     :call CocActionAsync('doHover')<CR>
+nmap gd    :call CocActionAsync("jumpDefinition")<CR>
+nmap gy    :call CocActionAsync("jumpDeclaration")<CR>
+nmap gi    :call CocActionAsync("jumpImplementation")<CR>
+nmap gr    :call CocActionAsync("jumpReferences")<CR>
 nmap ?g   :<c-u>WhichKey 'g'<CR>
 
 nmap <buffer> <A-l> :call CocLocations('ccls','$ccls/navigate',{'direction':'D'})<cr>

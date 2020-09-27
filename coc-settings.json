@@ -1,4 +1,5 @@
 {
+    "ccls.completion.detailedLabel": true,
     "languageserver": {
         "ccls": {
             "command": "ccls",
