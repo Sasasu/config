@@ -97,10 +97,10 @@ nmap gi    <Plug>(coc-implementation)<CR>
 nmap gr    <Plug>(coc-references)<CR>
 nmap ?g   :<c-u>WhichKey 'g'<CR>
 
-nmap <buffer> L :call CocLocations('ccls','$ccls/navigate',{'direction':'D'})<cr>
-nmap <buffer> K :call CocLocations('ccls','$ccls/navigate',{'direction':'L'})<cr>
-nmap <buffer> J :call CocLocations('ccls','$ccls/navigate',{'direction':'R'})<cr>
-nmap <buffer> H :call CocLocations('ccls','$ccls/navigate',{'direction':'U'})<cr>
+nmap <buffer> <A-l> :call CocLocations('ccls','$ccls/navigate',{'direction':'D'})<cr>
+nmap <buffer> <A-k> :call CocLocations('ccls','$ccls/navigate',{'direction':'L'})<cr>
+nmap <buffer> <A-j> :call CocLocations('ccls','$ccls/navigate',{'direction':'R'})<cr>
+nmap <buffer> <A-h> :call CocLocations('ccls','$ccls/navigate',{'direction':'U'})<cr>
 
 " 顶端buffer列表
 " bd 关闭buffer, bw 保存并关闭 buffer
