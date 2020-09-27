@@ -4,22 +4,23 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.config/nvim/plugged')
-Plug 'kana/vim-operator-user'                                          " 映射
-Plug 'vim-scripts/ShowTrailingWhitespace'                              " 高亮多余的空格
-Plug 'lilydjwg/fcitx.vim'                                              " 自动切换 fcitx 的输入状态
-Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}} " lsp
-Plug 'jackguo380/vim-lsp-cxx-highlight'                                " 语义高亮
-Plug 'ap/vim-buftabline'                                               " 顶端 buffer 列表
-Plug 'godlygeek/tabular'                                               " Tabularize /=\zs 按 '=' 对齐, 参数 zs 排除 '='
-Plug 'liuchengxu/vim-which-key'                                        " cheatsheet
-Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }                      " fzf
-Plug 'tpope/vim-fugitive'                                              " git
-Plug 'voldikss/vim-floaterm'                                           " popup terminal
-Plug 'solarnz/thrift.vim'
-Plug 'jceb/vim-orgmode'
-Plug 'joshdick/onedark.vim'
-Plug 'mileszs/ack.vim'
-Plug 'scrooloose/nerdtree'
+Plug 'kana/vim-operator-user'                                        " 映射
+Plug 'vim-scripts/ShowTrailingWhitespace'                            " 高亮多余的空格
+Plug 'lilydjwg/fcitx.vim'                                            " 自动切换 fcitx 的输入状态
+Plug 'ap/vim-buftabline'                                             " 顶端 buffer 列表
+Plug 'godlygeek/tabular'                                             " Tabularize /=\zs 按 '=' 对齐, 参数 zs 排除 '='
+Plug 'liuchengxu/vim-which-key'                                      " cheatsheet
+Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }                    " fzf
+Plug 'tpope/vim-fugitive'                                            " git
+Plug 'voldikss/vim-floaterm'                                         " popup terminal
+Plug 'mileszs/ack.vim'                                               " !Ark
+Plug 'scrooloose/nerdtree'                                           " 文件树
+Plug 'jceb/vim-orgmode'                                              " orgmode
+Plug 'neoclide/coc.nvim', {'branch': 'release'}                      " lsp
+Plug 'jackguo380/vim-lsp-cxx-highlight'                              " 语义高亮
+Plug 'maskray/vscode-ccls', {'do': 'yarn install --frozen-lockfile'} " ccls
+Plug 'joshdick/onedark.vim'                                          " 主题
+Plug 'solarnz/thrift.vim'                                            " 高亮
 call plug#end()
 
 
@@ -159,3 +160,6 @@ if executable('ag')
 endif
 
 let g:lsp_cxx_hl_use_text_props = 1
+let g:cpp_class_scope_highlight = 1
+let g:cpp_member_variable_highlight = 1
+let g:cpp_class_decl_highlight = 1
