@@ -87,7 +87,6 @@ command! -nargs=0 CSign :call CocAction('showSignatureHelp')
 command! -nargs=0 CRename :call CocAction('rename')
 command! -nargs=0 COutLine CocList outline
 command! -nargs=0 CDocSymbols :call CocAction('documentSymbols')
-command! -nargs=0 CS CocCommand clangd.switchSourceHeader
 vmap <C-f> <Plug>(coc-format-selected)<CR>
 nmap K    :call CocActionAsync('doHover')<CR>
 nmap g[    <Plug>(coc-diagnostic-prev)<CR>
