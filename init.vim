@@ -21,6 +21,7 @@ Plug 'jackguo380/vim-lsp-cxx-highlight'                              " 语义高
 Plug 'maskray/vscode-ccls', {'do': 'yarn install --frozen-lockfile'} " ccls
 Plug 'joshdick/onedark.vim'                                          " 主题
 Plug 'solarnz/thrift.vim'                                            " 高亮
+Plug 'lfv89/vim-interestingwords' " <leader-k> 高亮 <leader-K> 取消
 call plug#end()
 
 
