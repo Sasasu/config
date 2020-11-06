@@ -1,12 +1,17 @@
 #!/bin/bash
 bat=""
 if [ -d /sys/class/power_supply/BAT0 ];then
-        bat="BAT0 $(cat /sys/class/power_supply/BAT0/capacity)%"
+  bat=$bat"BAT0 $(cat /sys/class/power_supply/BAT0/capacity)% "
+elif [ -d /sys/class/power_supply/BAT1 ];then
+  bat=$bat"BAT1 $(cat /sys/class/power_supply/BAT1/capacity)% "
+else
+  bat=$bat"battery is not detected"
 fi
-if [ -d /sys/class/power_supply/BAT1 ];then
-        bat=$bat" BAT1 $(cat /sys/class/power_supply/BAT1/capacity)%"
+
+if [ -d /sys/class/power_supply/AC ]; then
+  if [ "$(cat /sys/class/power_supply/AC/online)" -eq 1 ];then
+    bat=$bat"AC"
+  fi
 fi
-if [ $(cat /sys/class/power_supply/AC/online) -eq 1 ];then
-        bat=$bat" AC"
-fi
-echo $bat
+
+echo "$bat"

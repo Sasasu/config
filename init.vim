@@ -24,7 +24,6 @@ Plug 'solarnz/thrift.vim'                                            " 高亮
 Plug 'lfv89/vim-interestingwords' " <leader-k> 高亮 <leader-K> 取消
 call plug#end()
 
-
 " 配置
 set nocompatible
 set relativenumber
@@ -73,11 +72,11 @@ map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
 
-nmap w= : resize +3<CR>
-nmap w- : resize -3<CR>
-nmap w[ : vertical resize -3<CR>
-nmap w] : vertical resize +3<CR>
-nmap w  : <c-u>WhichKey  'w'<CR>
+nmap w= :resize +3<CR>
+nmap w- :resize -3<CR>
+nmap w[ :vertical resize -3<CR>
+nmap w] :vertical resize +3<CR>
+nmap w  :<c-u>WhichKey  'w'<CR>
 
 " <c-i> 提示补全
 imap <silent><expr> <c-i> coc#refresh()
@@ -94,7 +93,7 @@ nmap gd    :call CocActionAsync("jumpDefinition")<CR>
 nmap gy    :call CocActionAsync("jumpDeclaration")<CR>
 nmap gi    :call CocActionAsync("jumpImplementation")<CR>
 nmap gr    :call CocActionAsync("jumpReferences")<CR>
-nmap ?g   :<c-u>WhichKey 'g'<CR>
+nmap ?g    :<c-u>WhichKey 'g'<CR>
 
 nmap <buffer> <A-l> :call CocLocations('ccls','$ccls/navigate',{'direction':'D'})<cr>
 nmap <buffer> <A-k> :call CocLocations('ccls','$ccls/navigate',{'direction':'L'})<cr>
@@ -104,26 +103,27 @@ nmap <buffer> <A-h> :call CocLocations('ccls','$ccls/navigate',{'direction':'U'}
 " 顶端buffer列表
 " bd 关闭buffer, bw 保存并关闭 buffer
 " ls -> 1,3bd
-nnoremap <C-N>      : bnext<CR>
-nnoremap <C-P>      : bprev<CR>
-nnoremap bd         : <c-u>bd<CR>
-nnoremap bw         : <c-u>bw<CR>
+nmap <C-N> :bnext<CR>
+nmap <C-P> :bprev<CR>
+nmap bd    :<c-u>bd<CR>
+nmap bw    :<c-u>bw<CR>
 
 let g:Lf_PreviewInPopup = 1
 let g:Lf_ShortcutF = "<leader>fx"
-noremap <leader>ff :<C-U><C-R>=printf("Leaderf file %s", "")<CR><CR>
-noremap <leader>fr :<C-U><C-R>=printf("Leaderf rg %s", "")<CR><CR>
-noremap <leader>fl :<C-U><C-R>=printf("Leaderf line %s", "")<CR><CR>
-noremap <leader>fm :<C-U><C-R>=printf("Leaderf mru %s", "")<CR><CR>
+nmap <leader>ff :<C-U><C-R>=printf("Leaderf file %s", "")<CR><CR>
+nmap <leader>fr :<C-U><C-R>=printf("Leaderf rg %s", "")<CR><CR>
+nmap <leader>fl :<C-U><C-R>=printf("Leaderf line %s", "")<CR><CR>
+nmap <leader>fm :<C-U><C-R>=printf("Leaderf mru %s", "")<CR><CR>
 
 " popup terminal
-noremap tt :FloatermNew  <CR>
-noremap th :FloatermHide  <CR>
-noremap ts :FloatermShow  <CR>
-noremap tn :FloatermNext  <CR>
-noremap tp :FloatermPrev  <CR>
-noremap t  :<c-u>WhichKey  't'<CR>
-tnoremap <Esc> <C-\><C-n>
+nmap tt :FloatermNew  <CR>
+nmap th :FloatermHide  <CR>
+nmap ts :FloatermShow  <CR>
+nmap tn :FloatermNext  <CR>
+nmap tp :FloatermPrev  <CR>
+nmap t  :<c-u>WhichKey  't'<CR>
+tmap <C-Q> <C-\><C-n>
+tmap <Esc> <C-\><C-n>th
 
 " explorer
 command! -nargs=0 NTree NERDTree
@@ -131,8 +131,8 @@ command! -nargs=0 CTree CocCommand explorer
 
 " cheatsheet
 call which_key#register('<leader>', "g:which_key_map")
-nnoremap <leader>      :<c-u>WhichKey  '<leader>'<CR>
-nnoremap <localleader> :<c-u>WhichKey  '<localleader>'<CR>
+nmap <leader>      :<c-u>WhichKey  '<leader>'<CR>
+nmap <localleader> :<c-u>WhichKey  '<localleader>'<CR>
 
 " 兼容性
 " for onedark.vim
