@@ -31,8 +31,8 @@ done
 $IPTABLES -t nat -A PREROUTING -p tcp -m mac --mac-source "$google_home_mac" -j $CLASH_TABLE
 
 for p in udp tcp; do
-  $IPTABLES -t nat -A PREROUTING -p $p -m mac --mac-source "$google_home_mac" --dport 53 -j DNAT --to 127.0.0.1
-  $IPTABLES -I PREROUTING -t nat -p $p -d 8.8.4.4 --dport 53 -j REDIRECT --to-ports 53
-  $IPTABLES -I PREROUTING -t nat -p $p -d 8.8.8.8 --dport 53 -j REDIRECT --to-ports 53
+  $IPTABLES -I PREROUTING -t nat -p $p -m mac --mac-source "$google_home_mac" -d 8.8.4.4 --dport 53 -j REDIRECT --to-ports 853
+  $IPTABLES -I PREROUTING -t nat -p $p -m mac --mac-source "$google_home_mac" -d 8.8.8.8 --dport 53 -j REDIRECT --to-ports 853
 done
 
+exec clash
