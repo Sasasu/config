@@ -18,9 +18,4 @@ if which tmux >/dev/null 2>&1
     end
 end
 
-
-alias jdark "sshpass -f /home/sa/.config/ark_ssh_pass ssh ark"
-
-
-
 starship init fish | source
