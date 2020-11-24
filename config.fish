@@ -18,4 +18,8 @@ if which tmux >/dev/null 2>&1
     end
 end
 
+function force_python2
+    set PATH "/opt/Python2:$PATH"
+end
+
 starship init fish | source
