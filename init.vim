@@ -37,17 +37,12 @@ set timeoutlen=500
 syntax on
 
 " 缩进和对齐
-set autoindent
-set smartindent
-set cindent
-set tabstop =4
-set shiftwidth =4
-" 显示tab和空格
-set list
+set autoindent smartindent list
+set tabstop =4 shiftwidth =4
+set noexpandtab
 set lcs=tab:\|\ ,nbsp:%,trail:- " 设置tab和空格样式
-highlight LeaderTab guifg=#666666 " 设定行首tab为灰色
+highlight LeaderTab guifg=#666666
 match LeaderTab /^\t/
-set ts=4 sts=4 sw=4 et
 
 function! HideNumber() " 行号开关
   if(&relativenumber == &number)
@@ -99,6 +94,7 @@ nmap <buffer> <A-l> :call CocLocations('ccls','$ccls/navigate',{'direction':'D'}
 nmap <buffer> <A-k> :call CocLocations('ccls','$ccls/navigate',{'direction':'L'})<cr>
 nmap <buffer> <A-j> :call CocLocations('ccls','$ccls/navigate',{'direction':'R'})<cr>
 nmap <buffer> <A-h> :call CocLocations('ccls','$ccls/navigate',{'direction':'U'})<cr>
+
 
 " 顶端buffer列表
 " bd 关闭buffer, bw 保存并关闭 buffer
@@ -161,3 +157,5 @@ let g:lsp_cxx_hl_use_text_props = 1
 let g:cpp_class_scope_highlight = 1
 let g:cpp_member_variable_highlight = 1
 let g:cpp_class_decl_highlight = 1
+
+iunmap <Tab>
