@@ -7,19 +7,22 @@ export GPG_TTY=(tty)
 alias ls exa
 alias gitc "git commit -s"
 
-# TMUX
-if which tmux >/dev/null 2>&1
-    # if no session is started, start a new session
-    test -z $TMUX && exec tmux
-
-    # when quitting tmux, try to attach
-    while test -z $TMUX
-        tmux attach || break
-    end
+if test -z $TMUX && test -z $SSH_CONNECTION && which tmux >/dev/null 2>&1
+  exec tmux
 end
 
-function force_python2
-    set PATH "/opt/Python2:$PATH"
+alias pp "ps aux | grep postgres | grep -v grep | grep -P '\d'"
+
+function python_to_3
+    sudo rm /usr/bin/python
+    sudo ln -s /usr/bin/python3 /usr/bin/python
 end
+
+function python_to_2
+    sudo rm /usr/bin/python
+    sudo ln -s /usr/bin/python2 /usr/bin/python
+end
+
+alias pp "ps aux | grep postgres | grep -v grep | grep -P '\d'"
 
 starship init fish | source
