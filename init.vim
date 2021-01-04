@@ -32,6 +32,7 @@ set showcmd " 在状态栏显示正在输入的命令
 set showmode " 左下角显示当前vim模式
 set scrolloff=7 " 在上下移动光标时，光标的上方或下方至少会保留显示的行数
 set hidden
+set colorcolumn=100
 set signcolumn=yes
 set timeoutlen=500
 syntax on
