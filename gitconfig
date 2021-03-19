@@ -1,0 +1,38 @@
+[user]
+	name = Sasasu
+	email = i@sasa.su
+	signingKey = 0AABCAF6773D5B6E1F4ECF794E72AF09097DAE2E
+	mail = i@sasa.su
+[core]
+	editor = nvim
+	pager = diff-so-fancy | less --tabs=4 -RFX
+	excludesfile = /home/sa/.gitignore
+[commit]
+	gpgSign = true
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[format]
+	signoff = true
+[color]
+	ui = true
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
+[color "diff"]
+	meta = 11
+	frag = magenta bold
+	commit = yellow bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
+[merge]
+	ff = false
+[pull]
+	rebase = true
+[rebase]
+	autoStash = true
