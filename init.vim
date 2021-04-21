@@ -5,7 +5,7 @@ endif
 
 call plug#begin('~/.config/nvim/plugged')
 Plug 'kana/vim-operator-user'                                        " 映射
-Plug 'vim-scripts/ShowTrailingWhitespace'                            " 高亮多余的空格
+Plug 'ntpeters/vim-better-whitespace'                                " 高亮多余的空格
 Plug 'lilydjwg/fcitx.vim'                                            " 自动切换 fcitx 的输入状态
 Plug 'ap/vim-buftabline'                                             " 顶端 buffer 列表
 Plug 'godlygeek/tabular'                                             " Tabularize /=\zs 按 '=' 对齐, 参数 zs 排除 '='
