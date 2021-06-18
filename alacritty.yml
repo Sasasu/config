@@ -1,29 +1,21 @@
+scrolling: {"history": 0} #disable
+cursor: {"style": Block}
+shell: {"program": "/usr/bin/fish"}
 
-# GNOME Terminal Tango Dark
-colors:
-  primary:
-    background: '0x2e3436'
-    foreground: '0xd3d7cf'
+selection:
+  semantic_escape_chars: ",│`|:\"' ()[]{}<>"
+  save_to_clipboard: false
 
-  normal:
-    black: '0x2e3436'
-    red: '0xcc0000'
-    green: '0x4e9a06'
-    yellow: '0xc4a000'
-    blue: '0x3465a4'
-    magenta: '0x75507b'
-    cyan: '0x06989a'
-    white: '0xd3d7cf'
+background_opacity: 0.95
+live_config_reload: true
 
-  bright:
-    black: '0x555753'
-    red: '0xef2929'
-    green: '0x8ae234'
-    yellow: '0xfce94f'
-    blue: '0x729fcf'
-    magenta: '0xad7fa8'
-    cyan: '0x34e2e2'
-    white: '0xeeeeec'
+debug:
+  render_timer: false
+  persistent_logging: false
+  log_level: OFF
+  print_events: false
+  ref_test: false
+
 font:
   size: 14
   normal:
@@ -38,29 +30,6 @@ font:
   bold_italic:
     family: FantasqueSansMono
     style: Bold Italic
-
-scrolling:
-  history: 0 # disable
-
-selection:
-  semantic_escape_chars: ",│`|:\"' ()[]{}<>"
-  save_to_clipboard: false
-
-cursor:
-  #   - ▇ Block
-  #   - _ Underline
-  #   - | Beam
-  style: Block
-
-shell:
-  program: /usr/bin/fish
-
-debug:
-  render_timer: false
-  persistent_logging: false
-  log_level: OFF
-  print_events: false
-  ref_test: false
 
 # Colors (Konsole's Dark Pastels)
 colors:
@@ -90,3 +59,4 @@ colors:
     magenta: '0xEC93D3'
     cyan:    '0x93E0E3'
     white:   '0xFFFFFF'
+
