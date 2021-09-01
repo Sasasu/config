@@ -4,10 +4,15 @@ shell: {"program": "/usr/bin/fish"}
 
 selection:
   semantic_escape_chars: ",│`|:\"' ()[]{}<>"
-  save_to_clipboard: false
+  save_to_clipboard: true
 
 background_opacity: 0.95
 live_config_reload: true
+
+window:
+  dimensions:
+    columns: 110
+    lines: 28
 
 debug:
   render_timer: false
@@ -59,4 +64,3 @@ colors:
     magenta: '0xEC93D3'
     cyan:    '0x93E0E3'
     white:   '0xFFFFFF'
-

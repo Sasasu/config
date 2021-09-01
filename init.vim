@@ -27,6 +27,7 @@ call plug#end()
 " 配置
 set nocompatible
 set relativenumber
+set number
 set mouse=  " 鼠标
 set showcmd " 在状态栏显示正在输入的命令
 set showmode " 左下角显示当前vim模式
@@ -159,5 +160,6 @@ let g:lsp_cxx_hl_use_text_props = 1
 let g:cpp_class_scope_highlight = 1
 let g:cpp_member_variable_highlight = 1
 let g:cpp_class_decl_highlight = 1
+let g:neovide_cursor_vfx_mode = "pixiedust"
 
 iunmap <Tab>
