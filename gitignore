@@ -6,5 +6,4 @@ build/*
 data/*
 third-party/*
 build/*
-bin/*
 .vscode/*

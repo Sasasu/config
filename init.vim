@@ -22,6 +22,7 @@ Plug 'maskray/vscode-ccls', {'do': 'yarn install --frozen-lockfile'} " ccls
 Plug 'joshdick/onedark.vim'                                          " 主题
 Plug 'solarnz/thrift.vim'                                            " 高亮
 Plug 'lfv89/vim-interestingwords' " <leader-k> 高亮 <leader-K> 取消
+Plug 'frazrepo/vim-rainbow'
 call plug#end()
 
 " 配置
@@ -161,5 +162,4 @@ let g:cpp_class_scope_highlight = 1
 let g:cpp_member_variable_highlight = 1
 let g:cpp_class_decl_highlight = 1
 let g:neovide_cursor_vfx_mode = "pixiedust"
-
-iunmap <Tab>
+let g:rainbow_active = 1
