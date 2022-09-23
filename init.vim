@@ -79,6 +79,7 @@ nmap w  :<c-u>WhichKey  'w'<CR>
 
 " <c-i> 提示补全
 imap <silent><expr> <c-i> coc#refresh()
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
 
 command! -nargs=0 CFormat :call CocActionAsync('format')
 command! -nargs=0 CFormatSelected :call CocActionAsync('formatSelected', 'v')
