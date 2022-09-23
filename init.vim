@@ -86,13 +86,15 @@ command! -nargs=0 CSign :call CocActionAsync('showSignatureHelp')
 command! -nargs=0 CRename :call CocActionAsync('rename')
 command! -nargs=0 COutLine CocList outline
 command! -nargs=0 CDocSymbols :call CocActionAsync('documentSymbols')
-vmap <C-f> :call CocActionAsync('formatSelected', 'v')<CR>
 nmap K     :call CocActionAsync('doHover')<CR>
 nmap gd    :call CocActionAsync("jumpDefinition")<CR>
 nmap gy    :call CocActionAsync("jumpDeclaration")<CR>
 nmap gi    :call CocActionAsync("jumpImplementation")<CR>
 nmap gr    :call CocActionAsync("jumpReferences")<CR>
 nmap ?g    :<c-u>WhichKey 'g'<CR>
+nmap <leader>a  <Plug>(coc-codeaction)
+nmap <leader>al  <Plug>(coc-codelens-action)
+nmap <leader>f  <Plug>(coc-coc-fix-current)
 
 nmap <buffer> <A-l> :call CocLocations('ccls','$ccls/navigate',{'direction':'D'})<cr>
 nmap <buffer> <A-k> :call CocLocations('ccls','$ccls/navigate',{'direction':'L'})<cr>
