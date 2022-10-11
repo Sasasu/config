@@ -94,8 +94,8 @@ nmap gi    :call CocActionAsync("jumpImplementation")<CR>
 nmap gr    :call CocActionAsync("jumpReferences")<CR>
 nmap ?g    :<c-u>WhichKey 'g'<CR>
 nmap <leader>a  <Plug>(coc-codeaction)
-nmap <leader>al  <Plug>(coc-codelens-action)
-nmap <leader>f  <Plug>(coc-coc-fix-current)
+nmap <leader>al <Plug>(coc-codelens-action)
+nmap <leader>af <Plug>(coc-coc-fix-current)
 
 nmap <buffer> <A-l> :call CocLocations('ccls','$ccls/navigate',{'direction':'D'})<cr>
 nmap <buffer> <A-k> :call CocLocations('ccls','$ccls/navigate',{'direction':'L'})<cr>
@@ -159,6 +159,8 @@ set guicursor=
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
+cnoreabbrev Ack Ack!
+nnoremap <Leader>a :Ack!<Space>
 
 let g:lsp_cxx_hl_use_text_props = 1
 let g:cpp_class_scope_highlight = 1
