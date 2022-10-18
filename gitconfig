@@ -5,8 +5,10 @@
 	mail = i@sasa.su
 [core]
 	editor = nvim
-	pager = diff-so-fancy | less --tabs=4 -RFX
+    pager = delta
 	excludesfile = /home/sa/.gitignore
+[interactive]
+    diffFilter = delta --color-only
 [commit]
 	gpgSign = true
 [filter "lfs"]
@@ -32,7 +34,13 @@
 	whitespace = red reverse
 [merge]
 	ff = false
+	conflictstyle = diff3
 [pull]
 	rebase = true
 [rebase]
 	autoStash = true
+[delta]
+    navigate = true    # use n and N to move between diff sections
+    light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
+[diff]
+    colorMoved = default

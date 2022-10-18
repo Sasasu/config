@@ -8,7 +8,7 @@ export LC_ALL=en_US.UTF-8
 export LANGUAGE=en_US:en_US
 
 alias ls exa
-alias tig gitui
+#alias tig gitui
 alias gitc "git commit -s"
 
 if test -z $TMUX && test -z $SSH_CONNECTION && which tmux >/dev/null 2>&1
