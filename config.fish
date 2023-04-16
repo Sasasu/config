@@ -10,6 +10,7 @@ export LANGUAGE=en_US:en_US
 alias ls exa
 #alias tig gitui
 alias gitc "git commit -s"
+alias make "make -j8"
 
 if test -z $TMUX && test -z $SSH_CONNECTION && which tmux >/dev/null 2>&1
   exec tmux
@@ -27,8 +28,6 @@ end
 
 alias pp "ps aux | grep postgres | grep -v grep | grep -P '\d'"
 alias ppc "ps aux | grep postgres | grep -v grep | grep con | grep -P '\d'"
-
-starship init fish | source
 
 export JAVA_HOME=/usr/lib/jvm/default-runtime
 export EDITOR=/usr/bin/nvim
