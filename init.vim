@@ -16,7 +16,8 @@ Plug 'voldikss/vim-floaterm'                                         " popup ter
 Plug 'mileszs/ack.vim'                                               " !Ark
 Plug 'scrooloose/nerdtree'                                           " 文件树
 Plug 'jceb/vim-orgmode'                                              " orgmode
-Plug 'neoclide/coc.nvim', {'branch': 'release'}                      " lsp
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}                      " lsp
+Plug 'neovim/nvim-lspconfig'
 Plug 'jackguo380/vim-lsp-cxx-highlight'                              " 语义高亮
 Plug 'maskray/vscode-ccls', {'do': 'yarn install --frozen-lockfile'} " ccls
 Plug 'joshdick/onedark.vim'                                          " 主题
@@ -78,30 +79,30 @@ nmap w] :vertical resize +3<CR>
 nmap w  :<c-u>WhichKey  'w'<CR>
 
 " <c-i> 提示补全
-imap <silent><expr> <c-i> coc#refresh()
-inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
-
-command! -nargs=0 CFormat :call CocActionAsync('format')
-command! -nargs=0 CFormatSelected :call CocActionAsync('formatSelected', 'v')
-command! -nargs=0 CSign :call CocActionAsync('showSignatureHelp')
-command! -nargs=0 CRename :call CocActionAsync('rename')
-command! -nargs=0 COutLine CocList outline
-command! -nargs=0 CDocSymbols :call CocActionAsync('documentSymbols')
-nmap K     :call CocActionAsync('doHover')<CR>
-nmap gd    :call CocActionAsync("jumpDefinition")<CR>
-nmap gy    :call CocActionAsync("jumpDeclaration")<CR>
-nmap gi    :call CocActionAsync("jumpImplementation")<CR>
-nmap gr    :call CocActionAsync("jumpReferences")<CR>
-nmap ?g    :<c-u>WhichKey 'g'<CR>
-nmap <leader>a  <Plug>(coc-codeaction)
-nmap <leader>al <Plug>(coc-codelens-action)
-nmap <leader>af <Plug>(coc-fix-current)
-
-nmap <buffer> <A-l> :call CocLocations('ccls','$ccls/navigate',{'direction':'D'})<cr>
-nmap <buffer> <A-k> :call CocLocations('ccls','$ccls/navigate',{'direction':'L'})<cr>
-nmap <buffer> <A-j> :call CocLocations('ccls','$ccls/navigate',{'direction':'R'})<cr>
-nmap <buffer> <A-h> :call CocLocations('ccls','$ccls/navigate',{'direction':'U'})<cr>
-
+" imap <silent><expr> <c-i> coc#refresh()
+" inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
+"
+" command! -nargs=0 CFormat :call CocActionAsync('format')
+" command! -nargs=0 CFormatSelected :call CocActionAsync('formatSelected', 'v')
+" command! -nargs=0 CSign :call CocActionAsync('showSignatureHelp')
+" command! -nargs=0 CRename :call CocActionAsync('rename')
+" command! -nargs=0 COutLine CocList outline
+" command! -nargs=0 CDocSymbols :call CocActionAsync('documentSymbols')
+" nmap K     :call CocActionAsync('doHover')<CR>
+" nmap gd    :call CocActionAsync("jumpDefinition")<CR>
+" nmap gy    :call CocActionAsync("jumpDeclaration")<CR>
+" nmap gi    :call CocActionAsync("jumpImplementation")<CR>
+" nmap gr    :call CocActionAsync("jumpReferences")<CR>
+" nmap ?g    :<c-u>WhichKey 'g'<CR>
+" nmap <leader>a  <Plug>(coc-codeaction)
+" nmap <leader>al <Plug>(coc-codelens-action)
+" nmap <leader>af <Plug>(coc-fix-current)
+"
+" nmap <buffer> <A-l> :call CocLocations('ccls','$ccls/navigate',{'direction':'D'})<cr>
+" nmap <buffer> <A-k> :call CocLocations('ccls','$ccls/navigate',{'direction':'L'})<cr>
+" nmap <buffer> <A-j> :call CocLocations('ccls','$ccls/navigate',{'direction':'R'})<cr>
+" nmap <buffer> <A-h> :call CocLocations('ccls','$ccls/navigate',{'direction':'U'})<cr>
+"
 
 " 顶端buffer列表
 " bd 关闭buffer, bw 保存并关闭 buffer
@@ -168,3 +169,81 @@ let g:cpp_member_variable_highlight = 1
 let g:cpp_class_decl_highlight = 1
 let g:neovide_cursor_vfx_mode = "pixiedust"
 let g:rainbow_active = 1
+
+lua << EOF
+local lspconfig = require('lspconfig')
+
+-- Global mappings.
+-- See `:help vim.diagnostic.*` for documentation on any of the below functions
+vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
+vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
+
+-- Use LspAttach autocommand to only map the following keys
+-- after the language server attaches to the current buffer
+vim.api.nvim_create_autocmd('LspAttach', {
+  group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+  callback = function(ev)
+    -- Enable completion triggered by <c-x><c-o>
+    vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
+
+    -- Buffer local mappings.
+    -- See `:help vim.lsp.*` for documentation on any of the below functions
+    local opts = { buffer = ev.buf }
+    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+    vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
+    vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
+    vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, opts)
+    vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, opts)
+    vim.keymap.set('n', '<space>wl', function()
+      print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+    end, opts)
+    vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, opts)
+    vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
+    vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, opts)
+    vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+    vim.keymap.set('n', '<space>f', function()
+      vim.lsp.buf.format { async = true }
+    end, opts)
+  end,
+})
+
+lspconfig.rust_analyzer.setup {
+  settings = {
+    ['rust-analyzer'] = {},
+  },
+}
+
+local on_attach = function(client, bufnr)
+  if vim.g.config.use_winbar == true then
+    navic.attach(client, bufnr)
+  end
+  if client.name == 'gopls' then
+    client.server_capabilities.semanticTokensProvider = {
+      full = true,
+      legend = {
+        tokenTypes = { 'namespace', 'type', 'class', 'enum', 'interface', 'struct', 'typeParameter', 'parameter', 'variable', 'property', 'enumMember', 'event', 'function', 'method', 'macro', 'keyword', 'modifier', 'comment', 'string', 'number', 'regexp', 'operator', 'decorator' },
+        tokenModifiers = { 'declaration', 'definition', 'readonly', 'static', 'deprecated', 'abstract', 'async', 'modification', 'documentation', 'defaultLibrary'}
+      }
+    }
+  end
+end
+
+lspconfig.gopls.setup {
+  on_attach = on_attach,
+  settings = {
+    gopls = {
+      analyses = {
+        unusedparams = true,
+      },
+      semanticTokens = true,
+      staticcheck = true,
+      gofumpt = true,
+    },
+  },
+}
+
+EOF

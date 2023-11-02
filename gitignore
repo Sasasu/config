@@ -7,3 +7,4 @@ data/*
 third-party/*
 build/*
 .vscode/*
+.cache
