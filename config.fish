@@ -11,6 +11,7 @@ alias ls exa
 #alias tig gitui
 alias gitc "git commit -s"
 alias make "make -j8"
+alias ag "rg"
 
 if test -z $TMUX && test -z $SSH_CONNECTION && which tmux >/dev/null 2>&1
   exec tmux
