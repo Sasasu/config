@@ -357,4 +357,6 @@ lspconfig.pylsp.setup {
   }
 }
 
+lspconfig.rust_analyzer.setup{}
+
 EOF
