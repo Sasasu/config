@@ -1,17 +1,28 @@
 #!/bin/bash
 bat=""
-if [ -d /sys/class/power_supply/BAT0 ];then
-  bat=$bat"BAT0 $(cat /sys/class/power_supply/BAT0/capacity)% "
-elif [ -d /sys/class/power_supply/BAT1 ];then
-  bat=$bat"BAT1 $(cat /sys/class/power_supply/BAT1/capacity)% "
-else
-  bat=$bat"battery is not detected"
-fi
 
-if [ -d /sys/class/power_supply/AC ]; then
-  if [ "$(cat /sys/class/power_supply/AC/online)" -eq 1 ];then
-    bat=$bat"AC"
-  fi
+if [[ $(uname) == "Drawin" ]];then
+    if [ -d /sys/class/power_supply/BAT0 ];then
+      bat=$bat"BAT0 $(cat /sys/class/power_supply/BAT0/capacity)% "
+    elif [ -d /sys/class/power_supply/BAT1 ];then
+      bat=$bat"BAT1 $(cat /sys/class/power_supply/BAT1/capacity)% "
+    else
+      bat=$bat"battery is not detected"
+    fi
+
+    if [ -d /sys/class/power_supply/AC ]; then
+      if [ "$(cat /sys/class/power_supply/AC/online)" -eq 1 ];then
+        bat=$bat"AC"
+      fi
+    fi
+else
+    if [[ $(pmset -g ac) != "No adapter attached." ]]; then
+        bat=$bat"AC"
+    else
+        bat=$bat"BAT"
+    fi
+
+    bat=$bat" $(pmset -g batt | grep -Eo "\d+%" | cut -d% -f1)%"
 fi
 
 echo "$bat"
