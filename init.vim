@@ -77,6 +77,7 @@ function! SwithCopilot()
 endfunc
 nnoremap <F2> :call SwithCopilot()<CR>
 let g:copilot_enabled = 0
+let g:copilot_filetypes = { '*': v:true, }
 
 " 键位
 let g:mapleader      = "."
@@ -84,10 +85,6 @@ let g:maplocalleader = ","
 let g:which_key_map =  {}
 
 nmap <silent><esc> :nohlsearch<CR>
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
 
 nmap w= :resize +3<CR>
 nmap w- :resize -3<CR>
@@ -190,6 +187,7 @@ let g:rainbow_active = 1
 lua << EOF
 local lspconfig = require('lspconfig')
 local cmp = require'cmp'
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 -- Global mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
@@ -256,7 +254,6 @@ cmp.setup.cmdline(':', {
 })
 
 -- Set up lspconfig.
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 -- Use LspAttach autocommand to only map the following keys
 -- after the language server attaches to the current buffer
@@ -291,17 +288,11 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 
 local on_attach = function(client, bufnr)
-  if vim.g.config.use_winbar == true then
-    navic.attach(client, bufnr)
-  end
-  if client.name == 'gopls' then
-    client.server_capabilities.semanticTokensProvider = {
-      full = true,
-      legend = {
-        tokenTypes = { 'namespace', 'type', 'class', 'enum', 'interface', 'struct', 'typeParameter', 'parameter', 'variable', 'property', 'enumMember', 'event', 'function', 'method', 'macro', 'keyword', 'modifier', 'comment', 'string', 'number', 'regexp', 'operator', 'decorator' },
-        tokenModifiers = { 'declaration', 'definition', 'readonly', 'static', 'deprecated', 'abstract', 'async', 'modification', 'documentation', 'defaultLibrary'}
-      }
-    }
+  if (vim.g.config or {}).use_winbar == true then
+    local ok, navic = pcall(require, 'nvim-navic')
+    if ok and client.server_capabilities.documentSymbolProvider then
+      navic.attach(client, bufnr)
+    end
   end
 end
 
@@ -343,7 +334,12 @@ lspconfig.gopls.setup {
   },
 }
 
-lspconfig.clangd.setup {}
+lspconfig.clangd.setup {
+  cmd = {
+    "clangd"
+  },
+}
+
 lspconfig.pylsp.setup {
   settings = {
     pylsp = {

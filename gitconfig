@@ -4,18 +4,13 @@
 	signingKey = 0AABCAF6773D5B6E1F4ECF794E72AF09097DAE2E
 	mail = i@sasa.su
 [core]
+	symlinks = true
 	editor = nvim
-    pager = delta
+	pager = delta
 	excludesfile = /home/sa/.gitignore
-[interactive]
-    diffFilter = delta --color-only
+	symlink = true
 [commit]
 	gpgSign = true
-[filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
 [format]
 	signoff = true
 [color]
@@ -44,5 +39,16 @@
     light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
 [diff]
     colorMoved = default
-[protocol "file"]
-	allow = always
+[url "ssh://git@ssh.github.com:443/"]
+	insteadOf = git@github.com:
+[url "git@github.gwd.broadcom.net:"]
+	insteadOf = https://github.gwd.broadcom.net/
+	insteadOf = https://github.gwd.broadcom.net/
+[credential "https://github.gwd.broadcom.net"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
